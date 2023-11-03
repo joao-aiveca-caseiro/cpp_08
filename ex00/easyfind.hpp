@@ -19,22 +19,27 @@
 #include <deque>
 #include <list>
 
-template <typename T>
-int	easyfind(T &a, int b)
+
+class NotFound: public std::exception
 {
-	typename T::iterator it;
-	int index = 0;
-	for (it = a.begin(); it != a.end(); it++)
+	virtual const char* what() const throw()
 	{
-		if (*it == b)
-		{
-			std::cout << "Found the first occurrence of " << b << " at index " << index << "." << std::endl;
-			return (0);
-		}
-		index++;
+		return ("No occurrence of the specified value was found.");
 	}
+};
+
+template <typename T>
+void	easyfind(T &a, int b)
+{
+	typename T::iterator it = std::find(a.begin(), a.end(), b);
+	if (it != a.end())
+	{
+		size_t position = std::distance(a.begin(), it);
+		std::cout << "Found the first occurrence of " << b << " at index " << position << "." << std::endl;
+	}
+	else
+		throw NotFound();
 	std::cout << "No occurrence of " << b << " was found." << std::endl;
-	return (1);
 }
 
 
