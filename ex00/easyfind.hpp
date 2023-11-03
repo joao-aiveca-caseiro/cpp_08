@@ -18,6 +18,7 @@
 #include <vector>
 #include <deque>
 #include <list>
+#include <algorithm>
 
 
 class NotFound: public std::exception
@@ -39,7 +40,6 @@ void	easyfind(T &a, int b)
 	}
 	else
 		throw NotFound();
-	std::cout << "No occurrence of " << b << " was found." << std::endl;
 }
 
 
