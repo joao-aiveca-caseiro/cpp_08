@@ -30,7 +30,7 @@ class NotFound: public std::exception
 };
 
 template <typename T>
-void	easyfind(T &a, int b)
+typename T::iterator	easyfind(T &a, int b)
 {
 	typename T::iterator it = std::find(a.begin(), a.end(), b);
 	if (it != a.end())
@@ -40,6 +40,7 @@ void	easyfind(T &a, int b)
 	}
 	else
 		throw NotFound();
+	return it;
 }
 
 
