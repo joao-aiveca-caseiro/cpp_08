@@ -14,32 +14,12 @@
 
 int main( void ) 
 {
-	// std::vector<int> vec1;
-	// vec1.push_back(2);
-	// vec1.push_back(4);
-
-	// std::vector<int> vec2;
-	// vec1.push_back(3);
-	// vec1.push_back(4);
-
-	// std::vector<int> vec3;
-	// vec1.push_back(3);
-	// vec1.push_back(4);
-
-	// vec2.insert(vec2.end(), vec1.begin(), vec3.end());
-
-	// for (std::vector<int>::iterator it = vec2.begin(); it != vec2.end(); it++)
-	// {
-	// 	std::cout << *it << " ";
-	// }
-	// std::cout << std::endl;
-
-
-	std::cout << "-- Testing adding elements over the size limit --" << std::endl;
+	
+	std::cout << "\n-- Testing adding elements over the size limit --" << std::endl;
+	Span sp0(0);
 	try
 	{
-		Span limit0(0);
-		limit0.addNumber(2);
+		sp0.addNumber(2);
 	}
 	catch(const std::exception& e)
 	{
@@ -47,16 +27,16 @@ int main( void )
 	}
 	
 	std::cout << "\n-- Testing valid spans --" << std::endl;
-	Span sp = Span(5);
-	sp.addNumber(6);
-	sp.addNumber(3);
-	sp.addNumber(17);
-	sp.addNumber(9);
-	sp.addNumber(11);
+	Span sp1(5);
+	sp1.addNumber(6);
+	sp1.addNumber(3);
+	sp1.addNumber(17);
+	sp1.addNumber(9);
+	sp1.addNumber(11);
 	try
 	{
-		std::cout << sp.shortestSpan() << std::endl;
-		std::cout << sp.longestSpan() << std::endl;
+		std::cout << "shortest span: " << sp1.shortestSpan() << std::endl;
+		std::cout << "longest span: " << sp1.longestSpan() << std::endl;
 	}
 	catch(const std::exception& e)
 	{
@@ -64,12 +44,51 @@ int main( void )
 	}
 
 	std::cout << "\n-- Testing invalid spans --" << std::endl;
-	Span sp = Span(5);
-	sp.addNumber(6);
+	Span sp2(5);
+	sp2.addNumber(6);
 	try
 	{
-		std::cout << sp.shortestSpan() << std::endl;
+		std::cout << "shortest span: " << sp2.shortestSpan() << std::endl;
 		//std::cout << sp.longestSpan() << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+
+	std::cout << "\n-- Testing adding multiple numbers at once --" << std::endl;
+	std::deque<int> deq;
+	deq.push_back(-5);
+	deq.push_back(0);
+	deq.push_back(15);
+	deq.push_back(-1500);
+	deq.push_back(500);
+
+	Span sp3(5);
+	sp3.addMultipleNumbers<std::deque<int> >(deq.begin(), deq.end());
+	try
+	{
+		std::cout << "shortest span: " << sp3.shortestSpan() << std::endl;
+		std::cout << "longest span: " << sp3.longestSpan() << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+
+	std::cout << "\n-- Testing adding 100,000 numbers at once --" << std::endl;
+	std::vector<int> vec;
+
+	for (int i = 0; i < 100000; i++)
+	{
+		vec.push_back(i);
+	}
+	Span sp4(100000);
+	try
+	{
+		sp4.addMultipleNumbers<std::vector<int> >(vec.begin(), vec.end());
+		std::cout << "shortest span: " << sp4.shortestSpan() << std::endl;
+		std::cout << "longest span: " << sp4.longestSpan() << std::endl;
 	}
 	catch(const std::exception& e)
 	{
