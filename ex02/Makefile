@@ -1,4 +1,4 @@
-SRCS		= main.cpp MutantStack.cpp
+SRCS		= main.cpp
 INCS		= MutantStack.hpp
 OBJS		= ${SRCS:.cpp=.o}
 NAME		= test

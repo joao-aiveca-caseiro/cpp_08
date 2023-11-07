@@ -6,7 +6,7 @@
 /*   By: jaiveca- <jaiveca-@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 18:58:40 by jaiveca-          #+#    #+#             */
-/*   Updated: 2023/11/06 14:31:27 by jaiveca-         ###   ########.fr       */
+/*   Updated: 2023/11/07 15:14:29 by jaiveca-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,7 @@ unsigned int	Span::shortestSpan()
 	{
 		if (it != sorted.begin())
 		{
-			//std::cout << *it << " " << std::endl;
 			span = std::abs(*it - *(it - 1));
-			//std::cout << "SPAN: " << span << std::endl;
 			shortest = std::min(span, shortest);
 		}
 	}
